@@ -11,9 +11,8 @@
 
 // const contenedorCarrito = require("../../carrtio/carritoFirebase");
 // const contenedorProductos = require("../../productos/productosFirebase");
-const contenedorCarrito = require("../../carrtio/index");
+const contenedorCarrito = require("../carrtio/index");
 
-// console.log(contenedorCarrito());
 
 const saveCarrito = async (req, res) => {
 	const carrito = {
@@ -21,7 +20,6 @@ const saveCarrito = async (req, res) => {
 		productos: []
 	}
 	const contenedor = await contenedorCarrito();
-	console.log(contenedor)
 	const id = await contenedor.save(carrito);
 	if (id) return res.status(200).json({ idCarrito: id });
 	else return res.status(404).json({ message: "No se pudo guardar el carrito" });

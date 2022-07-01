@@ -7,7 +7,7 @@ const {
 	addProductoToCarrito,
 	removeProductoFromCarrito,
 	deleteCarrito
-} = require('../controllers/carritoController/carritoControllerMemoria');
+} = require('../controllers/carritoController');
 
 // POST
 router.post('/', saveCarrito);

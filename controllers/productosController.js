@@ -3,7 +3,7 @@
 
 // const contenedorProductos = require("../../productos/productosMongo")
 
-const contenedorProductos = require("../../productos/productosFirebase")
+const contenedorProductos = require("../productos/productosFirebase")
 
 const saveProducto = async (req, res) => {
 	const producto = req.body;

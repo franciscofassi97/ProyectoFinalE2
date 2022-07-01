@@ -6,7 +6,7 @@ const {
 	getAllProductos,
 	deleteProducto,
 	updateProducto
-} = require('../controllers/productosController/productosControllerMemoria');
+} = require('../controllers/productosController');
 
 
 router.post('/', saveProducto);
