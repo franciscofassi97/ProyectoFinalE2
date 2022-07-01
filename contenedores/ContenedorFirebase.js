@@ -50,10 +50,6 @@ class ContenedorFirebase {
 				return { id: doc.id, ...doc.data() }
 			})
 			return tempDoc
-			tempDoc.forEach(doc => {
-				console.log(doc.id, '=>', doc.data());
-			});
-
 
 		} catch (error) {
 			console.log("Error Al buscar");
@@ -63,9 +59,10 @@ class ContenedorFirebase {
 	getById = async (id) => {
 		try {
 			const query = this.query();
-			const doc = await query.doc(id).get();
-			const result = doc.map((doc) => doc.data());
-			return result;
+			const doc = query.doc(id);
+			const item = await doc.get();
+			const data = { id: item.id, ...item.data() };
+			return data;
 		} catch (error) {
 			console.log("Error Al buscar ");
 		}
