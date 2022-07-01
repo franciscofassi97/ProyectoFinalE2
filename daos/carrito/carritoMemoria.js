@@ -1,4 +1,4 @@
-const ContenedorMemoria = require("../contenedores/ContenedorMemoria")
+const ContenedorMemoria = require("../../contenedores/ContenedorMemoria")
 
 class ContenedorCarritoMemoria extends ContenedorMemoria {
 	constructor() {

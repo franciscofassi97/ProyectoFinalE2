@@ -1,4 +1,4 @@
-const ContenedorMongo = require("../contenedores/ContenedorMongo");
+const ContenedorMongo = require("../../contenedores/ContenedorMongo");
 const mongoose = require("mongoose");
 
 const productosSchema = new mongoose.Schema(

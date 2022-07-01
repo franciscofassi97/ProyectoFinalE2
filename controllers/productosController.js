@@ -1,12 +1,11 @@
-// const contenedorProductos = require("../../productos/productosMemoria");
-// const contenedorProductos = require("../../productos/productosArchivos");
-
-// const contenedorProductos = require("../../productos/productosMongo")
-
-const contenedorProductos = require("../productos/productosFirebase")
+//Funcion que decide que contenedor usar 
+const contenedor = require("../daos/index")
 
 const saveProducto = async (req, res) => {
 	const producto = req.body;
+	const contenedorProductos = await contenedor("productos");
+
+
 	const id = await contenedorProductos.save(producto);
 	if (id) return res.status(200).json({ idProducto: id });
 	else return res.status(404).json({ message: "No se pudo guardar el producto" });
@@ -14,7 +13,7 @@ const saveProducto = async (req, res) => {
 
 const getAllProductos = async (req, res) => {
 	const id = req.params.id
-
+	const contenedorProductos = await contenedor("productos");
 	if (id) {
 		const producto = await contenedorProductos.getById(id);
 		if (producto) return res.status(200).json(producto);
@@ -28,6 +27,7 @@ const getAllProductos = async (req, res) => {
 
 const deleteProducto = async (req, res) => {
 	const id = req.params.id;
+	const contenedorProductos = await contenedor("productos");
 	const producto = await contenedorProductos.getById(id);
 
 	if (producto) {
@@ -47,6 +47,7 @@ const deleteProducto = async (req, res) => {
 
 const updateProducto = async (req, res) => {
 	const id = req.params.id;
+	const contenedorProductos = await contenedor("productos");
 	const productoToUpdate = await contenedorProductos.getById(id);
 	const producto = req.body;
 	if (productoToUpdate) {

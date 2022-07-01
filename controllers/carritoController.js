@@ -1,32 +1,21 @@
-// const contenedorCarritoMemroia = require("../../carrtio/carriotoMemoria");
-// const contenedorProductosMemoria = require("../../productos/productosMemoria");
-
-// const contenedorCarritoMongo = require("../../carrtio/carritoMongo");
-
-// const contenedorCarrito = require("../../carrtio/carritoArchivos");
-// const contenedorProductos = require("../../productos/productosArchivos");
-
-// const contenedorCarrito = require("../../carrtio/carritoMongo");
-// const contenedorProductos = require("../../productos/productosMongo");
-
-// const contenedorCarrito = require("../../carrtio/carritoFirebase");
-// const contenedorProductos = require("../../productos/productosFirebase");
-const contenedorCarrito = require("../carrtio/index");
-
+//Funcion que decide que contenedor usar 
+const contenedor = require('../daos/index');
 
 const saveCarrito = async (req, res) => {
 	const carrito = {
 		timesTamp: new Date(),
 		productos: []
 	}
-	const contenedor = await contenedorCarrito();
-	const id = await contenedor.save(carrito);
+	const contenedorCarrito = await contenedor('carrito');
+
+	const id = await contenedorCarrito.save(carrito);
 	if (id) return res.status(200).json({ idCarrito: id });
 	else return res.status(404).json({ message: "No se pudo guardar el carrito" });
 }
 
 const getAllCarritos = async (req, res) => {
 	const id = req.params.id;
+	const contenedorCarrito = await contenedor('carrito');
 
 	if (id) {
 		const carritoById = await contenedorCarrito.getById(id);
@@ -42,6 +31,8 @@ const getAllCarritos = async (req, res) => {
 const addProductoToCarrito = async (req, res) => {
 	const idCart = req.params.id;
 	const { idProducto } = req.body;
+	const contenedorCarrito = await contenedor('carrito');
+	const contenedorProductos = await contenedor('productos');
 
 	const carrito = await contenedorCarrito.getById(idCart);
 	const producto = await contenedorProductos.getById(idProducto);
@@ -66,6 +57,8 @@ const addProductoToCarrito = async (req, res) => {
 const removeProductoFromCarrito = async (req, res) => {
 	const idCart = req.params.id;
 	const idProducto = req.params.id_prod;
+	const contenedorCarrito = await contenedor('carrito');
+
 
 	let carrito = await contenedorCarrito.getById(idCart);
 	const index = carrito.productos.findIndex(obj => obj.id == idProducto);
@@ -88,7 +81,10 @@ const removeProductoFromCarrito = async (req, res) => {
 
 const deleteCarrito = async (req, res) => {
 	const id = req.params.id;
+	const contenedorCarrito = await contenedor('carrito');
+
 	const carrito = await contenedorCarrito.getById(id);
+
 	if (carrito) {
 		const carritoEliminado = await contenedorCarrito.deleteById(id)
 		return res
