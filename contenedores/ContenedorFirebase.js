@@ -31,7 +31,7 @@ class ContenedorFirebase {
 		try {
 			const query = this.query();
 			const doc = query.doc();
-			await doc.create({ objecto })
+			await doc.create(objecto)
 			return doc.id;
 
 		} catch (error) {
@@ -41,7 +41,7 @@ class ContenedorFirebase {
 
 	getAllData = async () => {
 		try {
-			const dataReturn = [{}];
+			const dataReturn = [];
 
 			const query = this.query();
 			const querySnapshot = await query.get();
@@ -49,13 +49,11 @@ class ContenedorFirebase {
 			const tempDoc = querySnapshot.docs.map((doc) => {
 				return { id: doc.id, ...doc.data() }
 			})
-			tempDoc.forEach((doc) => {
-				newObject = {
-					id: doc.id,
-					...doc.objecto,
-				};
-			})
-			return dataReturn;
+			return tempDoc
+			tempDoc.forEach(doc => {
+				console.log(doc.id, '=>', doc.data());
+			});
+
 
 		} catch (error) {
 			console.log("Error Al buscar");
