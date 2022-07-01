@@ -1,0 +1,47 @@
+[
+    {
+        "nombre": "producto6",
+        "descripcion": "producto6",
+        "codigo": "producto6",
+        "fotoUrl": "producto6",
+        "precio": "producto6",
+        "stock": "producto6",
+        "id": 1
+    },
+    {
+        "nombre": "producto6",
+        "descripcion": "producto6",
+        "codigo": "producto6",
+        "fotoUrl": "producto6",
+        "precio": "producto6",
+        "stock": "producto6",
+        "id": 4
+    },
+    {
+        "nombre": "producto6",
+        "descripcion": "producto6",
+        "codigo": "producto6",
+        "fotoUrl": "producto6",
+        "precio": "producto6",
+        "stock": "producto6",
+        "id": 5
+    },
+    {
+        "id": 6,
+        "nombre": "Actualizado",
+        "descripcion": "producto6",
+        "codigo": "producto6",
+        "fotoUrl": "producto6",
+        "precio": "Actualizado",
+        "stock": "Actualizado"
+    },
+    {
+        "nombre": "producto6",
+        "descripcion": "producto6",
+        "codigo": "producto6",
+        "fotoUrl": "producto6",
+        "precio": "producto6",
+        "stock": "producto6",
+        "id": 7
+    }
+]
