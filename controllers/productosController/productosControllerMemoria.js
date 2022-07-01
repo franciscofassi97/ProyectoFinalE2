@@ -49,8 +49,6 @@ const updateProducto = async (req, res) => {
 	const id = req.params.id;
 	const productoToUpdate = await contenedorProductos.getById(id);
 	const producto = req.body;
-	console.log(productoToUpdate);
-
 	if (productoToUpdate) {
 		const productoUpdate = {
 			id: productoToUpdate.id,

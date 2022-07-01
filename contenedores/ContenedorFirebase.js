@@ -7,15 +7,6 @@ admin.initializeApp({
 	databaseURL: "https://ecomercecoderhouse.firebaseio.com"
 });
 
-// const probar = async () => {
-//     console.log("ejecutando")
-//     const db = admin.firestore();
-//     const query = db.collection("test");
-
-//     const rojo = query.doc("rojo");
-//     await rojo.create({ nombre: 'rojo' })
-// }
-
 class ContenedorFirebase {
 
 	constructor(nombreColeccion) {
@@ -24,8 +15,6 @@ class ContenedorFirebase {
 
 	db = admin.firestore();
 	query = () => { return this.db.collection(this.nombreColeccion) };
-
-
 
 	save = async (objecto) => {
 		try {
@@ -41,8 +30,6 @@ class ContenedorFirebase {
 
 	getAllData = async () => {
 		try {
-			const dataReturn = [];
-
 			const query = this.query();
 			const querySnapshot = await query.get();
 
@@ -61,8 +48,10 @@ class ContenedorFirebase {
 			const query = this.query();
 			const doc = query.doc(id);
 			const item = await doc.get();
-			const data = { id: item.id, ...item.data() };
-			return data;
+			if (item.exists) {
+				const data = { id: item.id, ...item.data() };
+				return data;
+			} else throw new Error("No encontrado");
 		} catch (error) {
 			console.log("Error Al buscar ");
 		}
@@ -83,7 +72,8 @@ class ContenedorFirebase {
 			const query = this.query();
 			const doc = await query.doc(id);
 			const docUpdate = await doc.update(objeto);
-			return docUpdate;
+			if (docUpdate) return docUpdate;
+			else throw new Error("No fue posible actualizar");
 		} catch (error) {
 			console.log("Error al actualizar");
 		}

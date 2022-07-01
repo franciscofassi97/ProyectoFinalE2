@@ -1,18 +1,28 @@
 // const contenedorCarritoMemroia = require("../../carrtio/carriotoMemoria");
 // const contenedorProductosMemoria = require("../../productos/productosMemoria");
 
+// const contenedorCarritoMongo = require("../../carrtio/carritoMongo");
+
 // const contenedorCarrito = require("../../carrtio/carritoArchivos");
 // const contenedorProductos = require("../../productos/productosArchivos");
 
-const contenedorCarrito = require("../../carrtio/carritoMongo");
-const contenedorProductos = require("../../productos/productosMongo");
+// const contenedorCarrito = require("../../carrtio/carritoMongo");
+// const contenedorProductos = require("../../productos/productosMongo");
+
+// const contenedorCarrito = require("../../carrtio/carritoFirebase");
+// const contenedorProductos = require("../../productos/productosFirebase");
+const contenedorCarrito = require("../../carrtio/index");
+
+// console.log(contenedorCarrito());
 
 const saveCarrito = async (req, res) => {
 	const carrito = {
 		timesTamp: new Date(),
 		productos: []
 	}
-	const id = await contenedorCarrito.save(carrito);
+	const contenedor = await contenedorCarrito();
+	console.log(contenedor)
+	const id = await contenedor.save(carrito);
 	if (id) return res.status(200).json({ idCarrito: id });
 	else return res.status(404).json({ message: "No se pudo guardar el carrito" });
 }
